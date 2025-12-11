@@ -1,0 +1,140 @@
+.login-link-landingpage{
+    border: 1px solid rgb(183, 230, 181);
+    width: 100px;
+    margin-left: 15px;
+    text-align: center;
+    background-color: rgb(183, 230, 181);
+    border-radius: 0.4rem;
+    color: rgb(0, 0, 0);
+}
+
+.flash-message{
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.progress-bar{
+    height: 5px;
+    background-color: #555;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.progress{
+    height: 100%;
+    background-color: #4CAF50;
+    border-radius: 5px;
+    animation: progress 5s linear;
+}
+@keyframes progress{
+    0% {
+        width: 100%;
+
+    }
+    100%{ width: 0%;}
+}
+
+.small{
+    /*border: 1px solid red;*/
+    font-size: 1.1rem;
+}
+
+.forgot-pass{
+    color: #0d19be;
+    text-decoration: none;
+}
+.forgot-pass:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+.task-page{
+    max-height: 90vh;
+}
+
+
+/* kanban-style in dashboard page design */
+.kanban-style{
+   padding: 0;
+   border: 1px solid red;
+   max-width: 97vw;
+   height: 100vh;
+}
+.kanban-style .project-list{
+    /* border:  1px solid red; */
+    max-width: 300px;
+    margin-left: 2%;
+    margin-top: 1%;
+    padding: 12px 20px;
+}
+.kanban-style .project-select{
+    /* border: 1px solid red; */
+    padding: 14px 14px;
+    margin-top: 12px;
+    height: 60vh;
+}
+
+.reset-body {
+            background: #f7f9fb;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container-hv {
+            background: #fff;
+            padding: 32px 28px 28px 28px;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+            min-width: 320px;
+        }
+        h2 {
+            color: #0078d7;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="email"] {
+            padding: 10px;
+            margin-bottom: 18px;
+            border: 1px solid #bcd0e5;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        input[type="submit"] {
+            background: #0078d7;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 0;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        input[type="submit"]:hover {
+            background: #005fa3;
+        }
+
+
+.list-group-item.active {
+  background-color: #0d6efd; /* Bootstrap primary color */
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.list-group-item {
+  transition: background-color 0.3s ease;
+}
+.list-group-item:hover {
+  background-color: #e9ecef; /* Light gray on hover */
+  cursor: pointer;
+}
+
+
+
