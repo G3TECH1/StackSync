@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>StackSync | Collaborative Multi-Stack Planner</title>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='custom.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='icons/bootstrap-icons-1.13.1/bootstrap-icons.min.css')}}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a href="/" class="navbar-brand fw-bolder">StackSync</a>
+
+            <button type="button" class="navbar-toggler" 
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            >
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item d-lg-none">
+                        <a href="{{url_for('main.sign_up')}}" class="nav-link text-right py-4 mx-3">Sign Up</a>
+                    </li>
+                    <li class="nav-item d-lg-none mb-2">
+                        <a href="{{url_for('main.login')}}" class="nav-link text-left login-link-landingpage">Log In</a>
+                    </li>
+
+                    <li class="nav-item d-none d-lg-inline-block me-2">
+                        <a href="{{url_for('main.sign_up')}}" class="btn btn-outline-light me-2">Sign Up</a>
+                    </li>
+                    <li class="nav-item d-none d-lg-inline-block">
+                        <a href="{{url_for('main.login')}}" class="btn btn-primary">Log In</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="p-5 text-center bg-light">
+        <div class="container">
+            <h1 class="display-4 fw-bolder text-dark mb-3">
+                Plan the Stack, Not Just the Task
+            </h1>
+            <p class="lead text-muted mx-auto  head-p">
+                StackSync is the collaborative project planner <br>built for mordern microservices,
+                making multi-language and multi-database development easy to track.
+            </p>
+            <a href="/register" class="btn btn-primary btn-lg mt-3 shadow">
+                Start Planning for Free Today!
+            </a>
+        </div>
+    </header>
+
+    <section class="container py-5">
+        <h2 class="text-center mb-5 fw-bold">Built For Backend versatility</h2>
+        <div class="row text-center">
+            <div class="col-lg-4 mb-4">
+                <div class="h-100 p-4 border rounded-3 shadow-sm">
+                    <i class="bi bi-lock-fill text-primary display-6"></i>
+                    <h3 class="h5 mt-3">SQL Integrity(Flask)</h3>
+                    <p class="text-muted">Securely manage users and corse project structure
+                        with robust MySQL and Python logic.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <div class="h-100 p-4 border rounded-3 shadow-sm">
+                    <i class="bi bi-speedometer2 text-success display-6"></i>
+                    <h3 class="h5 mt-3">NoSQL Speed (Express)</h3>
+                    <p class="text-muted">
+                        Lightning-fast task creation and update via a dedicated Node.js/MongoDB API
+                        endpoint.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <div class="h-100 p-4 border rounded-3 shadow-sm">
+                    <i class="bi bi-code-slash text-info display-6"></i>
+                    <h3 class="h5 mt-5">Stack Tags & Filtering</h3>
+                    <p class="text-muted">
+                        Easily Tag task with #Flask, #Ruby on Rails or #Bootstrap to
+                        visualize work queues by technology
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="bg-dark text-white-50 text-center py-3">
+        <div class="container">
+            &copy; 2025 StackSync.
+        </div>
+    </footer>
+    <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+</body>
+</html>

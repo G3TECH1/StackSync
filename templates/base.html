@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StackSync</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='custom.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='icons/bootstrap-icons-1.13.1/bootstrap-icons.min.css')}}">
+    {% block head %}{% endblock %}
+</head>
+<body style="background-color: #F8F9FA;" >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black shadow-lg">
+        <div class="container">
+            <a href="{{url_for('main.index')}}" class="navbar-brand fw-bold">
+                StackSync
+            </a>
+            <button 
+            class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navgation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item d-lg-inline-block">
+                            <a href="{{url_for('main.logout')}}" class="btn btn-outline-light">
+                                Log out 
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item d-lg-none">
+                            <a href="{{url_for('main.sign_up')}}" class="nav-link text-right py-4 mx-3">Sign up</a>
+                        </li>
+                        <li class="nav-item d-lg-none mb-2">
+                            <a href="{{url_for('main.login')}}" 
+                            class="nav-link text-center border-bottom py-2">Log In</a>
+                        </li>
+                        <li class="nav-item d-none d-lg-inline-block me-2">
+                            <a href="{{url_for('main.sign_up')}}" 
+                            class="btn btn-outline-light">Sign up</a>
+                        </li>
+                        <li class="nav-item d-none d-lg-inline-block">
+                            <a href="{{url_for('main.login')}}" 
+                            class="btn btn-primary">Log In</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main role="main" class="container mt-5">
+        <div class="flash-message-container">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-message">
+                        <p>{{messages[0]}}</p>
+                        <div class="progress-bar">
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+        </div>
+    </main>
+    {% block content %}{% endblock %}
+    <script src="{{url_for('static', filename='Script.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

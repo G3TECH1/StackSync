@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% set api_url = config['EXPRESS_API_URL'] %}
+
+{% block content %}
+
+<h1 class="fw-light mb-4 text-center">StackSync Dashboard</h1>
+
+<div class="container kanban-style">
+    <div class="row">
+        <div class="col-12 col-lg-12 mb-4 project-list">
+            <div class="card-header fw-bold bg-secondary text-white text-center">
+                My Projects ({{ projects|length }})
+            </div>
+            <ul class="list-group list-group-flush" id="project-list">
+                {% if projects %}
+                    {% for project in projects %}
+                        <a 
+                        href="#" 
+                        class="list-group-item list-group-item-action{% if loop.first %}active{%endif%}"
+                        data-id="{{ project.id }}"
+                        >{{ project.title }}</a>
+                    {% endfor %}
+                {% else %}
+                    <li class="list-group-item text-muted text-center">
+                        <i class="bi bi-question-circle"></i>No project yet
+                    </li>
+                {%endif%}
+                <a href="#" class="list-group-item list-group-item-action text-primary" 
+                data-bs-toggle="modal" data-bs-target="#newProjectModal">
+                <i class="bi bi-plus-circle-fill"></i> Create New Project
+                </a>
+            </ul>
+        </div>
+        <!-- Active project title -->
+        <!-- <h2 id="active-project-title" class="mb-0">Select a Project</h2> -->
+
+        <!-- New Project Modal -->
+        <div class="modal fade" id="newProjectModal" tabindex="-1" aria-labelledby="newProjectModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content bg-light border-secondary">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title" id="newProjectModalLabel">Create New Project</h5>
+                    <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="newProjectForm" method="post" action="{{ url_for('main.createproject') }}">
+                    {{ form.hidden_tag() }}
+                    <div class="modal-body">
+                    <div class="mb-3">
+                        {{ form.title.label(class="form-label") }}
+                        {{ form.title(class="form-control") }}
+                    </div>
+                    </div>
+                    <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Project</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-9 project-select">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 id="active-project-title" class="mb-0">Select a Project</h2>
+                <button class="btn btn-success shadow-sm" 
+                data-bs-toggle="modal" data-bs-target="#newTaskModal">
+                <i class="bi bi-plus-lg"></i> New Task
+                </button>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2 mb-4 bg-light rounded shadow p-2">
+                <span class="text-muted me-2 pt-1">Filter by Stack:</span>
+                <button class="btn btn-sm btn-info filter-tag" data-tag="Flask">#Flask</button>
+                <button class="btn btn-sm btn-success filter-tag" data-tag="Express">#Express</button>
+                <button class="btn btn-sm btn-primary filter-tag" data-tag="Bootstrap">#Bootstrap</button>
+                <button class="btn btn-sm btn-secondary filter-tag" data-tag="All">#Show All</button>
+            </div>
+
+            <div class="d-flex flex-row overflow-auto pb-3 p-3 bg-secondary rounded shadow-lg" style="max-height: 80vh;">
+                {% for status, color in [('To Do', 'danger'), ('In Progress', 'warning'), ('Complete', 'success')] %}
+                    <div class="flex-shrink-0 me-4 p-2 bg-white border rounded shadow-sm" style="min-width: 300px;">
+                        <h4 class="text{{ color }} border-bottom pb-2 mb-3">
+                            {{ status}} (<span class="task-count" data-status="{{ status }}">0</span>)</h4>
+                        <div class="task-column d-flex flex-column gap-2" id="{{status|lower|replace(' ','-')}}-tasks" data-status="{{ status }}">
+                            <p class="text-muted text-center task-placeholder">Loading task....</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal fade" id="newTaskModal" tabindex="-1" aria-labelledby="newTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-light border-secondary">
+            <div class="modal-header border-secondary">
+                <h5 class="modal-title" id="newTaskModalLabel" >Create New Task</h5>
+                <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" id="newTaskForm">
+                <div class="modal-body">
+                    <input type="hidden" id="task-project-id" name="project_id">
+
+                    <div class="mb-3">
+                        <label for="task-title" class="form-label text-dark">Task Title</label>
+                        <input type="text" class="form-control" id="task-title" name="title" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="task-description" class="form-label text-dark">Description (optional)</label>
+                        <textarea class="form-control" id="task-description" name="description" rows="3"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="task-tag" class="form-label text-dark">Tags (e.g., Flask, Ruby, #Golang)</label>
+                        <input type="text" class="form-control" id="task-tag" name="stack_tags" placeholder="e.g., Flask, Ruby" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="task-status" class="form-label text-dark">Initial Status</label>
+                        <select class="form-select" id="task-status" name="status">
+                            <option value="To Do">To Do</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Complete">Complete</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer border-secondary">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="saveTaskBtn">Create Task</button>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    // This defines the global variable for Script.js to use
+    window.EXPRESS_API_URL = "{{ api_url }}"
+</script>
+
+<script src="{{ url_for('static', filename='Script.js')}}"></script>
+{% endblock %}

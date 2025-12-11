@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StackSync | Message Box</title>
+    <style>
+        body {
+            background: linear-gradient(120deg, #f7f9fb 60%, #e3eefe 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .message-container {
+            background: #fff;
+            padding: 36px 32px 32px 32px;
+            border-radius: 14px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+            min-width: 340px;
+            max-width: 90vw;
+            text-align: center;
+        }
+        h1 {
+            color: #0078d7;
+            margin-bottom: 18px;
+            font-size: 2em;
+        }
+        p {
+            color: #222;
+            font-size: 1.15em;
+            margin-bottom: 28px;
+        }
+        a.button {
+            display: inline-block;
+            background: #0078d7;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 28px;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s;
+        }
+        a.button:hover {
+            background: #005fa3;
+            color: #ffe082;
+        }
+    </style>
+</head>
+<body>
+    <div class="message-container">
+        <h1>{{title}}</h1>
+        <p>{{message}}</p>
+        {% if back_url and back_text %}
+            <a href="{{back_url}}"  class="button">{{back_text}}</a>
+        {% endif %}
+    </div>
+</body>
+</html>
