@@ -57,3 +57,15 @@ flask shell
 # Run the Flask app
 flask run 
 # Default: [http://127.0.0.1:5000](http://127.0.0.1:5000)
+#API SETUP
+
+cd ../express_api # Assuming this folder structure
+
+# Install dependencies
+npm install 
+
+# Configure environment variables (MongoDB URL, etc.)
+
+# Run the Express API
+node server.js 
+# Default: [http://127.0.0.1:5001](http://127.0.0.1:5001)
